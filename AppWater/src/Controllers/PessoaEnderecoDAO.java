@@ -15,13 +15,13 @@ public class PessoaEnderecoDAO extends AbstractDAO {
     public int add(Object object) throws SQLException {
         PessoaEndereco pessoaEndereco = (PessoaEndereco) object;
         return super.executeUpdate(
-                "INSERT INTO PESSOA_ENDERECO (DESCRICAO, NUMERO, BAIRRO, "
-                + "ID_CIDADE, ID_PESSOA) VALUES (?,?,?,?)",
+                "INSERT INTO PESSOAS_ENDERECOS (DESCRICAO, NUMERO, BAIRRO, "
+                + "ID_PESSOA, ID_CIDADE) VALUES (?,?,?,?,?)",
                 pessoaEndereco.getDescricao(),
                 pessoaEndereco.getNumero(),
                 pessoaEndereco.getBairro(),
-                pessoaEndereco.getCidade().getId(),
-                pessoaEndereco.getPessoa().getId()
+                pessoaEndereco.getPessoa().getId(),
+                pessoaEndereco.getCidade().getId()
         );
     }
 
@@ -29,13 +29,13 @@ public class PessoaEnderecoDAO extends AbstractDAO {
     public int update(Object object) throws SQLException {
         PessoaEndereco pessoaEndereco = (PessoaEndereco) object;
         return super.executeUpdate(
-                "UPDATE PESSOA_ENDERECO SET DESCRICAO=?, NUMERO=?, "
-                + " BAIRRO=?, ID_CIDADE=?, ID_PESSOA=? WHERE ID=?",
+                "UPDATE PESSOAS_ENDERECOS SET DESCRICAO=?, NUMERO=?, BAIRRO=?, "
+                + " ID_PESSOA=?, ID_CIDADE=? WHERE ID=?",
                 pessoaEndereco.getDescricao(),
                 pessoaEndereco.getNumero(),
                 pessoaEndereco.getBairro(),
-                pessoaEndereco.getCidade().getId(),
                 pessoaEndereco.getPessoa().getId(),
+                pessoaEndereco.getCidade().getId(),
                 pessoaEndereco.getId()
         );
     }
@@ -43,14 +43,14 @@ public class PessoaEnderecoDAO extends AbstractDAO {
     @Override
     public int delete(Object object) throws SQLException {
         PessoaEndereco pessoaEndereco = (PessoaEndereco) object;
-        return super.executeUpdate("DELETE FROM PESSOA_ENDERECO WHERE ID=?",
+        return super.executeUpdate("DELETE FROM PESSOAS_ENDERECOS WHERE ID=?",
                 pessoaEndereco.getId());
     }
 
     @Override
     public Object get(int id) throws SQLException {
         ResultSet rs = super.executeQuery(
-                "SELECT * FROM PESSOA_ENDERECO WHERE ID=?",
+                "SELECT * FROM PESSOAS_ENDERECOS WHERE ID=?",
                 id);
         return (rs.next() ? createObject(rs) : null);
     }
@@ -58,22 +58,22 @@ public class PessoaEnderecoDAO extends AbstractDAO {
     @Override
     public List<Object> getList() throws SQLException {
         ResultSet rs = super.executeQuery(
-                "SELECT * FROM PESSOA_ENDERECO ORDER BY PESSOA_ENDERECO.DESCRICAO");
+                "SELECT * FROM PESSOAS_ENDERECOS ORDER BY PESSOAS_ENDERECOS.DESCRICAO");
         List<Object> retorno = new LinkedList<>();
         while (rs.next()) {
-            retorno.add(rs);
+            retorno.add(createObject(rs));
         }
         return retorno;
     }
 
     public List<Object> getList(String filtro) throws SQLException {
         ResultSet rs = super.executeQuery(
-                "SELECT * FROM PESSOA_ENDERECO WHERE PESSOA_ENDERECO.DESCRICAO LIKE ? "
-                + "ORDER BY PESSOA_ENDERECO.DESCRICAO",
+                "SELECT * FROM PESSOAS_ENDERECOS WHERE PESSOAS_ENDERECOS.DESCRICAO LIKE ? "
+                + "ORDER BY PESSOAS_ENDERECOS.DESCRICAO",
                 "%" + filtro.toUpperCase() + "%");
         List<Object> retorno = new LinkedList<>();
         while (rs.next()) {
-            retorno.add(rs);
+            retorno.add(createObject(rs));
         }
         return retorno;
     }

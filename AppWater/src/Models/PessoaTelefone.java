@@ -11,6 +11,12 @@ public class PessoaTelefone extends AbstractEntity {
         super();
     }
 
+    public PessoaTelefone(String descricao, String nroTelefone, Pessoa pessoa) {
+        super(descricao);
+        this.setNroTelefone(nroTelefone);
+        this.setPessoa(pessoa);
+    }
+    
     public PessoaTelefone(int id, String descricao, String nroTelefone, Pessoa pessoa) {
         super(id, descricao);
         this.setNroTelefone(nroTelefone);
@@ -31,5 +37,10 @@ public class PessoaTelefone extends AbstractEntity {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    @Override
+    public String toString() {
+        return this.getPessoa().getNome() + " - " + this.getNroTelefone() + " - " + this.getDescricao();
     }
 }

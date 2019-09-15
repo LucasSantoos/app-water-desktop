@@ -22,4 +22,9 @@ public class Cidade extends AbstractEntity {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return this.getDescricao() + " - " + this.getEstado().getDescricao();
+    } 
 }

@@ -1,10 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d013f80d-9808-412e-bf92-98ad211ec8e0" name="Default Changelist" comment="First commit :rocket:">
+      <change afterPath="$PROJECT_DIR$/src/Views/DialogCidade.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Views/DialogCidade.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Views/DialogPessoa.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Views/DialogPessoa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Views/DialogPessoaEndereco.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Views/DialogPessoaEndereco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Views/DialogPessoaTelefone.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Views/DialogPessoaTelefone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Controllers/CidadeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Controllers/CidadeDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Controllers/PessoaDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Controllers/PessoaDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Controllers/PessoaEnderecoDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Controllers/PessoaEnderecoDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Controllers/PessoaTelefoneDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Controllers/PessoaTelefoneDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Models/Cidade.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Models/Cidade.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Models/Estado.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Models/Estado.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Models/Pessoa.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Models/Pessoa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Models/PessoaEndereco.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Models/PessoaEndereco.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Models/PessoaTelefone.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Models/PessoaTelefone.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Testes/TesteCategoria.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Testes/TesteCategoria.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$8$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$8$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/CidadeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/CidadeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/PessoaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/PessoaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/PessoaEnderecoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/PessoaEnderecoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/PessoaTelefoneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/PessoaTelefoneDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Cidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Cidade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Estado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Pessoa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/PessoaEndereco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/PessoaEndereco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/PessoaTelefone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/PessoaTelefone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Testes/TesteCategoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Testes/TesteCategoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/DialogEstado.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/DialogEstado.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/DialogEstado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/DialogEstado.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1QqeI2s2O5ESUQyhhgELNZP88c3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d013f80d-9808-412e-bf92-98ad211ec8e0" name="Default Changelist" comment="" />
+      <created>1568502469946</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1568502469946</updated>
+    </task>
+    <task id="LOCAL-00001" summary="First commit :rocket:">
+      <created>1568502529814</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1568502529814</updated>
+    </task>
+    <task id="LOCAL-00002" summary="First commit :rocket:">
+      <created>1568502542125</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1568502542125</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First commit :rocket:" />
+    <option name="LAST_COMMIT_MESSAGE" value="First commit :rocket:" />
   </component>
 </project>

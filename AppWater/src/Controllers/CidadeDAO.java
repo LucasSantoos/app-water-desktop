@@ -14,7 +14,7 @@ public class CidadeDAO extends AbstractDAO {
     public int add(Object object) throws SQLException {
         Cidade cidade = (Cidade) object;
         return super.executeUpdate(
-                "INSERT INTO CIDADE (DESCRICAO, ID_ESTADO) "
+                "INSERT INTO CIDADES (DESCRICAO, ID_ESTADO) "
                 + "VALUES (?,?)",
                 cidade.getDescricao(),
                 cidade.getEstado().getId());
@@ -24,7 +24,7 @@ public class CidadeDAO extends AbstractDAO {
     public int update(Object object) throws SQLException {
         Cidade cidade = (Cidade) object;
         return super.executeUpdate(
-                "UPDATE CIDADE SET DESCRICAO=?, ID_ESTADO=? "
+                "UPDATE CIDADES SET DESCRICAO=?, ID_ESTADO=? "
                 + "WHERE ID=?",
                 cidade.getDescricao(),
                 cidade.getEstado().getId(),
@@ -35,14 +35,14 @@ public class CidadeDAO extends AbstractDAO {
     @Override
     public int delete(Object object) throws SQLException {
         Cidade cidade = (Cidade) object;
-        return super.executeUpdate("DELETE FROM CIDADE WHERE ID=?",
+        return super.executeUpdate("DELETE FROM CIDADES WHERE ID=?",
                 cidade.getId());
     }
 
     @Override
     public Object get(int id) throws SQLException {
         ResultSet rs = super.executeQuery(
-                "SELECT * FROM CIDADE WHERE ID=?",
+                "SELECT * FROM CIDADES WHERE ID=?",
                 id);
         return (rs.next() ? createObject(rs) : null);
     }
@@ -50,22 +50,22 @@ public class CidadeDAO extends AbstractDAO {
     @Override
     public List<Object> getList() throws SQLException {
         ResultSet rs = super.executeQuery(
-                "SELECT * FROM CIDADE ORDER BY CIDADE.DESCRICAO");
+                "SELECT * FROM CIDADES ORDER BY CIDADES.DESCRICAO");
         List<Object> retorno = new LinkedList<>();
         while (rs.next()) {
-            retorno.add(rs);
+            retorno.add(createObject(rs));
         }
         return retorno;
     }
 
     public List<Object> getList(String filtro) throws SQLException {
         ResultSet rs = super.executeQuery(
-                "SELECT * FROM CIDADE WHERE CIDADE.DESCRICAO LIKE ? "
-                + "ORDER BY CIDADE.DESCRICAO",
+                "SELECT * FROM CIDADES WHERE CIDADES.DESCRICAO LIKE ? "
+                + "ORDER BY CIDADES.DESCRICAO",
                 "%" + filtro.toUpperCase() + "%");
         List<Object> retorno = new LinkedList<>();
         while (rs.next()) {
-            retorno.add(rs);
+            retorno.add(createObject(rs));
         }
         return retorno;
     }

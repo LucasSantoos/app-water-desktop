@@ -1,29 +1,32 @@
 package Testes;
 
-import Controllers.EstadoDAO;
-import Controllers.PaisDAO;
+import Controllers.CidadeDAO;
+import Controllers.PessoaDAO;
+import Controllers.PessoaEnderecoDAO;
 
+import Models.Cidade;
 import Models.Estado;
-import Models.Pais;
+import Models.Pessoa;
+import Models.PessoaEndereco;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class TesteCategoria {
 
     public static void main(String[] args) {
 
-        EstadoDAO dao = new EstadoDAO();      
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        PessoaDAO pessoaDAO = new PessoaDAO();
+        PessoaEnderecoDAO pessoaEnderecoDAO = new PessoaEnderecoDAO();
+
+        Cidade cidade = new Cidade(1, "", new Estado());
+
+        Pessoa pessoa = new Pessoa(1, "", "", LocalDate.now());
         
-        PaisDAO paisDao = new PaisDAO();
-
-
-        Pais c1 = new Pais(12,"Brasil");
+        PessoaEndereco pessoaEndereco = new PessoaEndereco("di", "dad", "df", pessoa, cidade);
         
-
         try {
-            System.out.println(dao.getList());
-            
-                        System.out.println(paisDao.getList());
-
+            System.out.println(pessoaEnderecoDAO.add(pessoaEndereco));
 
         } catch (SQLException ex) {
             System.out.println("ERRO:" + ex.getMessage());

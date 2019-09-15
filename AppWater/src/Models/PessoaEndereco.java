@@ -12,7 +12,15 @@ public class PessoaEndereco extends AbstractEntity {
     public PessoaEndereco() {
         super();
     }
-
+    
+    public PessoaEndereco(String descricao, String numero, String bairro, Pessoa pessoa, Cidade cidade) {
+        super(descricao);
+        this.setNumero(numero);
+        this.setBairro(bairro);
+        this.setPessoa(pessoa);
+        this.setCidade(cidade);
+    }
+    
     public PessoaEndereco(int id, String descricao, String numero, String bairro, Pessoa pessoa, Cidade cidade) {
         super(id, descricao);
         this.setNumero(numero);
@@ -51,5 +59,10 @@ public class PessoaEndereco extends AbstractEntity {
 
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
+    }
+
+    @Override
+    public String toString() {
+        return this.pessoa.getNome() + " - " + this.getDescricao() + ", " + this.numero + ", " + this.getBairro();
     }
 }

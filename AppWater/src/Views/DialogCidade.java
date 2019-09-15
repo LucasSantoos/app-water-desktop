@@ -1,10 +1,10 @@
 
 package Views;
 
+import Controllers.CidadeDAO;
 import Controllers.EstadoDAO;
-import Controllers.PaisDAO;
+import Models.Cidade;
 import Models.Estado;
-import Models.Pais;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Vector;
@@ -12,43 +12,43 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-public class DialogEstado extends javax.swing.JDialog {
-    private EstadoDAO dao = new EstadoDAO();
+public class DialogCidade   extends javax.swing.JDialog {
+    private CidadeDAO dao = new CidadeDAO();
     
     private void iniciarComponentes(){
         textId.setText("");
         textNome.setText("");
-        comboPais.setSelectedIndex(0);
+        comboEstado.setSelectedIndex(0);
         textNome.requestFocus();
     }
-    private Estado createObject() throws ParseException{
-        return new Estado(
+    private Cidade createObject() throws ParseException{
+        return new Cidade(
         textId.getText().isEmpty()? 0 : Integer.parseInt(textId.getText()), 
         textNome.getText(),
-        (Pais)comboPais.getSelectedItem());
+        (Estado)comboEstado.getSelectedItem());
     }
-    private void fillComponents(Estado estado){
-        textId.setText(estado.getId()+"");
-        textNome.setText(estado.getDescricao());
-        comboPais.setSelectedItem(estado.getPais());
+    private void fillComponents(Cidade cidade){
+        textId.setText(cidade.getId()+"");
+        textNome.setText(cidade.getDescricao());
+        comboEstado.setSelectedItem(cidade.getEstado());
     }
-    private void loadEstadosList() throws SQLException{
+    private void loadCidadesList() throws SQLException{
         DefaultListModel lm = new DefaultListModel();
         lm.addAll(dao.getList());
-        listEstados.setModel(lm);
+        listCidades.setModel(lm);
     }
-    private void loadEstadosList(String filtro) throws SQLException{
+    private void loadCidadesList(String filtro) throws SQLException{
         DefaultListModel lm = new DefaultListModel();
         lm.addAll(dao.getList(filtro));
-        listEstados.setModel(lm);
+        listCidades.setModel(lm);
     }    
-    private void loadPaisesList() throws SQLException{
+    private void loadEstadosList() throws SQLException{
         DefaultComboBoxModel cbm = 
-        new DefaultComboBoxModel(new Vector(new PaisDAO().getList()));
-        comboPais.setModel(cbm);
+        new DefaultComboBoxModel(new Vector(new EstadoDAO().getList()));
+        comboEstado.setModel(cbm);
     }
             
-    public DialogEstado(java.awt.Frame parent, boolean modal) {
+    public DialogCidade(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -67,20 +67,20 @@ public class DialogEstado extends javax.swing.JDialog {
         textFiltro = new javax.swing.JTextField();
         buttonFiltrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listEstados = new javax.swing.JList();
+        listCidades = new javax.swing.JList();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         textId = new javax.swing.JTextField();
         textNome = new javax.swing.JTextField();
-        comboPais = new javax.swing.JComboBox<>();
+        comboEstado = new javax.swing.JComboBox<>();
         buttonNovo = new javax.swing.JButton();
         buttonSalvar = new javax.swing.JButton();
         buttonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de estados");
+        setTitle("Cadastro de cidades");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -120,17 +120,17 @@ public class DialogEstado extends javax.swing.JDialog {
                     .addComponent(buttonFiltrar)))
         );
 
-        listEstados.setModel(new javax.swing.AbstractListModel() {
+        listCidades.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Sem registros." };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        listEstados.addMouseListener(new java.awt.event.MouseAdapter() {
+        listCidades.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listEstadosMouseClicked(evt);
+                listCidadesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(listEstados);
+        jScrollPane1.setViewportView(listCidades);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
 
@@ -138,11 +138,11 @@ public class DialogEstado extends javax.swing.JDialog {
 
         jLabel3.setText("Descrição");
 
-        jLabel4.setText("Pais");
+        jLabel4.setText("Estado");
 
         textId.setEditable(false);
 
-        comboPais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         buttonNovo.setText("Novo");
         buttonNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +178,7 @@ public class DialogEstado extends javax.swing.JDialog {
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(textId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboPais, 0, 360, Short.MAX_VALUE)
+                    .addComponent(comboEstado, 0, 360, Short.MAX_VALUE)
                     .addComponent(textNome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +212,7 @@ public class DialogEstado extends javax.swing.JDialog {
                             .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
@@ -243,19 +243,19 @@ public class DialogEstado extends javax.swing.JDialog {
     private void buttonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFiltrarActionPerformed
         // TODO add your handling code here:
         try{
-            this.loadEstadosList(textFiltro.getText());
+            this.loadCidadesList(textFiltro.getText());
         }catch(SQLException ex){
             System.out.println("ERRO: "+ex.getMessage());
         }
     }//GEN-LAST:event_buttonFiltrarActionPerformed
 
-    private void listEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEstadosMouseClicked
+    private void listCidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listCidadesMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount()==2){
-            Estado estado = (Estado)listEstados.getSelectedValue();
-            this.fillComponents(estado);
+            Cidade cidade = (Cidade)listCidades.getSelectedValue();
+            this.fillComponents(cidade);
         }
-    }//GEN-LAST:event_listEstadosMouseClicked
+    }//GEN-LAST:event_listCidadesMouseClicked
 
     private void buttonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNovoActionPerformed
         // TODO add your handling code here:
@@ -279,8 +279,8 @@ public class DialogEstado extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,
                 retorno==0?"Não salvo":"Salvo");
             this.iniciarComponentes();
-            this.loadPaisesList();
-            this.loadEstadosList(textFiltro.getText());
+            this.loadCidadesList();
+            this.loadCidadesList(textFiltro.getText());
         }catch(SQLException ex){
             System.out.println("ERRO:"+ex.getMessage());
         }catch(ParseException ex){
@@ -301,7 +301,7 @@ public class DialogEstado extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,
                 dao.delete(createObject())==0?"Não removido":"Removido");
             this.iniciarComponentes();
-            this.loadPaisesList();
+            this.loadCidadesList();
         }catch(SQLException ex){
             System.out.println("ERRO:"+ex.getMessage());
         }catch(ParseException ex){
@@ -312,7 +312,7 @@ public class DialogEstado extends javax.swing.JDialog {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         try{
-            this.loadPaisesList();
+            this.loadCidadesList();
             this.loadEstadosList();
         }catch(SQLException ex){
             System.out.println("ERRO:"+ex.getMessage());
@@ -336,21 +336,23 @@ public class DialogEstado extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DialogEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogCidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DialogEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogCidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DialogEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogCidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DialogEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogCidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DialogEstado dialog = new DialogEstado(new javax.swing.JFrame(), true);
+                DialogCidade dialog = new DialogCidade(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -367,7 +369,7 @@ public class DialogEstado extends javax.swing.JDialog {
     private javax.swing.JButton buttonFiltrar;
     private javax.swing.JButton buttonNovo;
     private javax.swing.JButton buttonSalvar;
-    private javax.swing.JComboBox<String> comboPais;
+    private javax.swing.JComboBox<String> comboEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -375,7 +377,7 @@ public class DialogEstado extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList listEstados;
+    private javax.swing.JList listCidades;
     private javax.swing.JTextField textFiltro;
     private javax.swing.JTextField textId;
     private javax.swing.JTextField textNome;

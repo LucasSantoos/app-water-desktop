@@ -29,7 +29,7 @@ public class Estado extends AbstractEntity {
 
     @Override
     public String toString() {
-        return this.getDescricao();
+        return this.getDescricao() + " - " + this.getPais().getDescricao();
     }
    
 }

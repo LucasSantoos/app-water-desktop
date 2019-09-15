@@ -14,7 +14,7 @@ public class PessoaTelefoneDAO extends AbstractDAO {
     public int add(Object object) throws SQLException {
         PessoaTelefone pessoaTelefone = (PessoaTelefone) object;
         return super.executeUpdate(
-                "INSERT INTO PESSOA_TELEFONE (DESCRICAO, NRO_TELEFONE, "
+                "INSERT INTO PESSOAS_TELEFONES (DESCRICAO, NRO_TELEFONE, "
                         + "ID_PESSOA) VALUES (?,?,?)",
                 pessoaTelefone.getDescricao(),
                 pessoaTelefone.getNroTelefone(),
@@ -26,7 +26,7 @@ public class PessoaTelefoneDAO extends AbstractDAO {
     public int update(Object object) throws SQLException {
         PessoaTelefone pessoaTelefone = (PessoaTelefone) object;
         return super.executeUpdate(
-                "UPDATE PESSOA_TELEFONE SET DESCRICAO=?, NRO_TELEFONE=?, "
+                "UPDATE PESSOAS_TELEFONES SET DESCRICAO=?, NRO_TELEFONE=?, "
                 + " ID_PESSOA=? WHERE ID=?",
                 pessoaTelefone.getDescricao(),
                 pessoaTelefone.getNroTelefone(),
@@ -38,14 +38,14 @@ public class PessoaTelefoneDAO extends AbstractDAO {
     @Override
     public int delete(Object object) throws SQLException {
         PessoaTelefone pessoaTelefone = (PessoaTelefone) object;
-        return super.executeUpdate("DELETE FROM PESSOA_TELEFONE WHERE ID=?",
+        return super.executeUpdate("DELETE FROM PESSOAS_TELEFONES WHERE ID=?",
                 pessoaTelefone.getId());
     }
 
     @Override
     public Object get(int id) throws SQLException {
         ResultSet rs = super.executeQuery(
-                "SELECT * FROM PESSOA_TELEFONE WHERE ID=?",
+                "SELECT * FROM PESSOAS_TELEFONES WHERE ID=?",
                 id);
         return (rs.next() ? createObject(rs) : null);
     }
@@ -53,22 +53,22 @@ public class PessoaTelefoneDAO extends AbstractDAO {
     @Override
     public List<Object> getList() throws SQLException {
         ResultSet rs = super.executeQuery(
-                "SELECT * FROM PESSOA_TELEFONE ORDER BY PESSOA_TELEFONE.DESCRICAO");
+                "SELECT * FROM PESSOAS_TELEFONES ORDER BY PESSOAS_TELEFONES.DESCRICAO");
         List<Object> retorno = new LinkedList<>();
         while (rs.next()) {
-            retorno.add(rs);
+            retorno.add(createObject(rs));
         }
         return retorno;
     }
 
     public List<Object> getList(String filtro) throws SQLException {
         ResultSet rs = super.executeQuery(
-                "SELECT * FROM PESSOA_TELEFONE WHERE PESSOA_TELEFONE.DESCRICAO LIKE ? "
-                + "ORDER BY PESSOA_TELEFONE.DESCRICAO",
+                "SELECT * FROM PESSOAS_TELEFONES WHERE PESSOAS_TELEFONES.DESCRICAO LIKE ? "
+                + "ORDER BY PESSOAS_TELEFONES.DESCRICAO",
                 "%" + filtro.toUpperCase() + "%");
         List<Object> retorno = new LinkedList<>();
         while (rs.next()) {
-            retorno.add(rs);
+            retorno.add(createObject(rs));
         }
         return retorno;
     }

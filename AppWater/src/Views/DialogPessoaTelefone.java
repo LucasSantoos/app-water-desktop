@@ -1,10 +1,10 @@
 
 package Views;
 
-import Controllers.EstadoDAO;
-import Controllers.PaisDAO;
-import Models.Estado;
-import Models.Pais;
+import Controllers.PessoaTelefoneDAO;
+import Controllers.PessoaDAO;
+import Models.PessoaTelefone;
+import Models.Pessoa;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Vector;
@@ -12,43 +12,50 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-public class DialogEstado extends javax.swing.JDialog {
-    private EstadoDAO dao = new EstadoDAO();
+public class DialogPessoaTelefone extends javax.swing.JDialog {
+    private PessoaTelefoneDAO dao = new PessoaTelefoneDAO();
     
     private void iniciarComponentes(){
         textId.setText("");
         textNome.setText("");
-        comboPais.setSelectedIndex(0);
+        textNumero.setText("");
+        comboPessoa.setSelectedIndex(0);
         textNome.requestFocus();
     }
-    private Estado createObject() throws ParseException{
-        return new Estado(
+    
+    private PessoaTelefone createObject() throws ParseException{
+        return new PessoaTelefone(
         textId.getText().isEmpty()? 0 : Integer.parseInt(textId.getText()), 
         textNome.getText(),
-        (Pais)comboPais.getSelectedItem());
+        textNumero.getText(),
+        (Pessoa)comboPessoa.getSelectedItem());
     }
-    private void fillComponents(Estado estado){
-        textId.setText(estado.getId()+"");
-        textNome.setText(estado.getDescricao());
-        comboPais.setSelectedItem(estado.getPais());
+    
+    private void fillComponents(PessoaTelefone pessoaTelefone){
+        textId.setText(pessoaTelefone.getId()+"");
+        textNome.setText(pessoaTelefone.getDescricao());
+        comboPessoa.setSelectedItem(pessoaTelefone.getPessoa());
     }
-    private void loadEstadosList() throws SQLException{
+    
+    private void loadPessoaTelefonesList() throws SQLException{
         DefaultListModel lm = new DefaultListModel();
         lm.addAll(dao.getList());
-        listEstados.setModel(lm);
+        listTelefones.setModel(lm);
     }
-    private void loadEstadosList(String filtro) throws SQLException{
+    
+    private void loadPessoaTelefonesList(String filtro) throws SQLException{
         DefaultListModel lm = new DefaultListModel();
         lm.addAll(dao.getList(filtro));
-        listEstados.setModel(lm);
-    }    
-    private void loadPaisesList() throws SQLException{
+        listTelefones.setModel(lm);
+    } 
+    
+    private void loadPessoasList() throws SQLException{
         DefaultComboBoxModel cbm = 
-        new DefaultComboBoxModel(new Vector(new PaisDAO().getList()));
-        comboPais.setModel(cbm);
+        new DefaultComboBoxModel(new Vector(new PessoaDAO().getList()));
+        comboPessoa.setModel(cbm);
     }
             
-    public DialogEstado(java.awt.Frame parent, boolean modal) {
+    public DialogPessoaTelefone(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -67,20 +74,22 @@ public class DialogEstado extends javax.swing.JDialog {
         textFiltro = new javax.swing.JTextField();
         buttonFiltrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listEstados = new javax.swing.JList();
+        listTelefones = new javax.swing.JList();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         textId = new javax.swing.JTextField();
         textNome = new javax.swing.JTextField();
-        comboPais = new javax.swing.JComboBox<>();
+        comboPessoa = new javax.swing.JComboBox<>();
         buttonNovo = new javax.swing.JButton();
         buttonSalvar = new javax.swing.JButton();
         buttonExcluir = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        textNumero = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de estados");
+        setTitle("Cadastro de telefones");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -120,17 +129,17 @@ public class DialogEstado extends javax.swing.JDialog {
                     .addComponent(buttonFiltrar)))
         );
 
-        listEstados.setModel(new javax.swing.AbstractListModel() {
+        listTelefones.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Sem registros." };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        listEstados.addMouseListener(new java.awt.event.MouseAdapter() {
+        listTelefones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listEstadosMouseClicked(evt);
+                listTelefonesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(listEstados);
+        jScrollPane1.setViewportView(listTelefones);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
 
@@ -138,11 +147,11 @@ public class DialogEstado extends javax.swing.JDialog {
 
         jLabel3.setText("Descrição");
 
-        jLabel4.setText("Pais");
+        jLabel4.setText("Pessoa");
 
         textId.setEditable(false);
 
-        comboPais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         buttonNovo.setText("Novo");
         buttonNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -165,6 +174,14 @@ public class DialogEstado extends javax.swing.JDialog {
             }
         });
 
+        jLabel5.setText("Número");
+
+        textNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textNumeroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -172,14 +189,21 @@ public class DialogEstado extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(textId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboPais, 0, 360, Short.MAX_VALUE)
-                    .addComponent(textNome))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboPessoa, 0, 360, Short.MAX_VALUE)
+                            .addComponent(textNome)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textNumero)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -211,10 +235,14 @@ public class DialogEstado extends javax.swing.JDialog {
                             .addComponent(jLabel3)
                             .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(textNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(comboPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -243,19 +271,19 @@ public class DialogEstado extends javax.swing.JDialog {
     private void buttonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFiltrarActionPerformed
         // TODO add your handling code here:
         try{
-            this.loadEstadosList(textFiltro.getText());
+            this.loadPessoaTelefonesList(textFiltro.getText());
         }catch(SQLException ex){
             System.out.println("ERRO: "+ex.getMessage());
         }
     }//GEN-LAST:event_buttonFiltrarActionPerformed
 
-    private void listEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEstadosMouseClicked
+    private void listTelefonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listTelefonesMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount()==2){
-            Estado estado = (Estado)listEstados.getSelectedValue();
-            this.fillComponents(estado);
+            PessoaTelefone pessoaTelefone = (PessoaTelefone)listTelefones.getSelectedValue();
+            this.fillComponents(pessoaTelefone);
         }
-    }//GEN-LAST:event_listEstadosMouseClicked
+    }//GEN-LAST:event_listTelefonesMouseClicked
 
     private void buttonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNovoActionPerformed
         // TODO add your handling code here:
@@ -279,8 +307,8 @@ public class DialogEstado extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,
                 retorno==0?"Não salvo":"Salvo");
             this.iniciarComponentes();
-            this.loadPaisesList();
-            this.loadEstadosList(textFiltro.getText());
+            this.loadPessoaTelefonesList();
+            this.loadPessoaTelefonesList(textFiltro.getText());
         }catch(SQLException ex){
             System.out.println("ERRO:"+ex.getMessage());
         }catch(ParseException ex){
@@ -301,7 +329,7 @@ public class DialogEstado extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,
                 dao.delete(createObject())==0?"Não removido":"Removido");
             this.iniciarComponentes();
-            this.loadPaisesList();
+            this.loadPessoaTelefonesList();
         }catch(SQLException ex){
             System.out.println("ERRO:"+ex.getMessage());
         }catch(ParseException ex){
@@ -312,12 +340,16 @@ public class DialogEstado extends javax.swing.JDialog {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         try{
-            this.loadPaisesList();
-            this.loadEstadosList();
+            this.loadPessoaTelefonesList();
+            this.loadPessoasList();
         }catch(SQLException ex){
             System.out.println("ERRO:"+ex.getMessage());
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void textNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textNumeroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,21 +368,27 @@ public class DialogEstado extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DialogEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogPessoaTelefone.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DialogEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogPessoaTelefone.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DialogEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogPessoaTelefone.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DialogEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogPessoaTelefone.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DialogEstado dialog = new DialogEstado(new javax.swing.JFrame(), true);
+                DialogPessoaTelefone dialog = new DialogPessoaTelefone(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -367,17 +405,19 @@ public class DialogEstado extends javax.swing.JDialog {
     private javax.swing.JButton buttonFiltrar;
     private javax.swing.JButton buttonNovo;
     private javax.swing.JButton buttonSalvar;
-    private javax.swing.JComboBox<String> comboPais;
+    private javax.swing.JComboBox<String> comboPessoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList listEstados;
+    private javax.swing.JList listTelefones;
     private javax.swing.JTextField textFiltro;
     private javax.swing.JTextField textId;
     private javax.swing.JTextField textNome;
+    private javax.swing.JTextField textNumero;
     // End of variables declaration//GEN-END:variables
 }
