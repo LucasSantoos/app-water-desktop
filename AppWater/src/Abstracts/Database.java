@@ -13,7 +13,7 @@ abstract public class Database {
             connection = DriverManager.getConnection(
                     "jdbc:postgresql://localhost:5432/my_water",
                     "postgres",
-                    "Marcilio1");
+                    "postgres");
         }
         return connection;
     }

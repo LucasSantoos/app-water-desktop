@@ -2,31 +2,35 @@
 package Views;
 
 import Controllers.PessoaDAO;
+import Enums.TipoPessoa;
 import Models.Pessoa;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class DialogPessoa extends javax.swing.JDialog {
     private PessoaDAO dao = new PessoaDAO();
     DateTimeFormatter texto = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    
+
     private void iniciarComponentes(){
         textId.setText("");
         textNome.setText("");
         textData.setText("");
         textCpf.setText("");
         textNome.requestFocus();
+        comboTipoPessoa.setSelectedIndex(0);
     }
     private Pessoa createObject() throws ParseException{
         return new Pessoa(
         textId.getText().isEmpty()? 0 : Integer.parseInt(textId.getText()), 
         textNome.getText(),
         textCpf.getText(),
-        LocalDate.parse(textData.getText(),texto));
+        LocalDate.parse(textData.getText(),texto),
+        (TipoPessoa)comboTipoPessoa.getSelectedItem());
     }
     
     private void fillComponents(Pessoa pessoa){
@@ -34,7 +38,16 @@ public class DialogPessoa extends javax.swing.JDialog {
         textNome.setText(pessoa.getNome());
         textData.setText(pessoa.getDtNasc().format(texto));
         textCpf.setText(pessoa.getCpf());
+        comboTipoPessoa.setSelectedItem(pessoa.getTipoPessoa());
+
     }
+    
+    private void loadTipoPessoa(){
+        DefaultComboBoxModel cbm = 
+        new DefaultComboBoxModel(TipoPessoa.values());
+        comboTipoPessoa.setModel(cbm);
+    }
+    
     private void loadPessoaList() throws SQLException{
         DefaultListModel lm = new DefaultListModel();
         lm.addAll(dao.getList());
@@ -44,11 +57,8 @@ public class DialogPessoa extends javax.swing.JDialog {
         DefaultListModel lm = new DefaultListModel();
         lm.addAll(dao.getList(filtro));
         listPessoas.setModel(lm);
-    }    
-           
-    /**
-     * Creates new form DialogPessoa
-     */
+    }
+
     public DialogPessoa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -81,6 +91,8 @@ public class DialogPessoa extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         textData = new javax.swing.JFormattedTextField();
         textCpf = new javax.swing.JFormattedTextField();
+        comboTipoPessoa = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de pessoas");
@@ -183,6 +195,10 @@ public class DialogPessoa extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
+        comboTipoPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel7.setText("Tipo");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -196,18 +212,21 @@ public class DialogPessoa extends javax.swing.JDialog {
                             .addComponent(textId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel2))
-                                .addGap(7, 7, 7)))
+                                .addGap(7, 7, 7))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textData, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -237,7 +256,11 @@ public class DialogPessoa extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(textCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -255,7 +278,8 @@ public class DialogPessoa extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -308,8 +332,7 @@ public class DialogPessoa extends javax.swing.JDialog {
             }else{
                 retorno = dao.update(createObject());
             }
-            JOptionPane.showMessageDialog(null,
-                retorno==0?"Não Gravado":"gravado");
+            JOptionPane.showMessageDialog(null, retorno==0?"Não salvo":"Salvo");
             this.iniciarComponentes();
             this.loadPessoaList();
         }catch(SQLException ex){
@@ -322,15 +345,15 @@ public class DialogPessoa extends javax.swing.JDialog {
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
         // TODO add your handling code here:
         if (textId.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Selecione um Registro");
+            JOptionPane.showMessageDialog(null, "Selecione um registro");
             return;
         }
-        if (JOptionPane.showConfirmDialog(null, "Confirma?")!=0){
+        if (JOptionPane.showConfirmDialog(null, "Confirmar?")!=0){
             return;
         }
         try{
             JOptionPane.showMessageDialog(null,
-                dao.delete(createObject())==0?"Não Removido":"Removido");
+                dao.delete(createObject()) == 0 ? "Não removido" : "Removido");
             this.iniciarComponentes();
         }catch(SQLException ex){
             System.out.println("ERRO:"+ex.getMessage());
@@ -343,6 +366,7 @@ public class DialogPessoa extends javax.swing.JDialog {
         // TODO add your handling code here:
         try{
             this.loadPessoaList();
+            loadTipoPessoa();
         }catch(SQLException ex){
             System.out.println("ERRO:"+ex.getMessage());
         }
@@ -396,11 +420,13 @@ public class DialogPessoa extends javax.swing.JDialog {
     private javax.swing.JButton buttonFiltrar;
     private javax.swing.JButton buttonNovo;
     private javax.swing.JButton buttonSalvar;
+    private javax.swing.JComboBox<String> comboTipoPessoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

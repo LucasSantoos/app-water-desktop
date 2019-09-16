@@ -42,7 +42,7 @@ public class PessoaEndereco extends AbstractEntity {
     }
 
     public void setBairro(String bairro) {
-        this.bairro = bairro;
+        this.bairro = bairro.trim().isEmpty() ? "PADRÂO" : bairro.toUpperCase();
     }
 
     public Pessoa getPessoa() {
@@ -63,6 +63,7 @@ public class PessoaEndereco extends AbstractEntity {
 
     @Override
     public String toString() {
-        return this.pessoa.getNome() + " - " + this.getDescricao() + ", " + this.numero + ", " + this.getBairro();
+        return this.pessoa.getNome() + " - " + this.getDescricao() + ", " + this.numero + ", " + this.getBairro() + 
+                ", " + this.getCidade().getDescricao() + ", " + this.getCidade().getEstado().getDescricao();
     }
 }

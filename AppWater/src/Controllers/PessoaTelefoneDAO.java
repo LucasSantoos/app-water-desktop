@@ -15,7 +15,7 @@ public class PessoaTelefoneDAO extends AbstractDAO {
         PessoaTelefone pessoaTelefone = (PessoaTelefone) object;
         return super.executeUpdate(
                 "INSERT INTO PESSOAS_TELEFONES (DESCRICAO, NRO_TELEFONE, "
-                        + "ID_PESSOA) VALUES (?,?,?)",
+                + "ID_PESSOA) VALUES (?,?,?)",
                 pessoaTelefone.getDescricao(),
                 pessoaTelefone.getNroTelefone(),
                 pessoaTelefone.getPessoa().getId()

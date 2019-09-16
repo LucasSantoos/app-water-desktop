@@ -1,12 +1,10 @@
 package Controllers;
 
 import Abstracts.AbstractDAO;
-import Models.Estado;
-import Models.Cidade;
+import Enums.TipoPessoa;
 import Models.Pessoa;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,22 +14,24 @@ public class PessoaDAO extends AbstractDAO {
     public int add(Object object) throws SQLException {
         Pessoa pessoa = (Pessoa) object;
         return super.executeUpdate(
-                "INSERT INTO PESSOAS (NOME, CPF, DT_NASC) "
-                + "VALUES (?,?,?)",
+                "INSERT INTO PESSOAS (NOME, CPF, DT_NASC, TIPO_PESSOA) "
+                + "VALUES (?,?,?,?)",
                 pessoa.getNome(),
                 pessoa.getCpf(),
-                pessoa.getDtNasc());
+                pessoa.getDtNasc(),
+                pessoa.getTipoPessoa().name());
     }
 
     @Override
     public int update(Object object) throws SQLException {
         Pessoa pessoa = (Pessoa) object;
         return super.executeUpdate(
-                "UPDATE PESSOAS SET NOME=?, CPF=?, DT_NASC=? "
+                "UPDATE PESSOAS SET NOME=?, CPF=?, DT_NASC=?, TIPO_PESSOA=? "
                 + "WHERE ID=?",
                 pessoa.getNome(),
                 pessoa.getCpf(),
                 pessoa.getDtNasc(),
+                pessoa.getTipoPessoa().name(),
                 pessoa.getId()
         );
     }
@@ -80,7 +80,8 @@ public class PessoaDAO extends AbstractDAO {
                 rs.getInt("ID"),
                 rs.getString("NOME"),                
                 rs.getString("CPF"),
-                rs.getDate("DT_NASC").toLocalDate());
+                rs.getDate("DT_NASC").toLocalDate(),
+                TipoPessoa.valueOf(rs.getString("TIPO_PESSOA")));
         return pessoa;
     }
 }
