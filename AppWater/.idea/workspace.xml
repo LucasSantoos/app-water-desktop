@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d013f80d-9808-412e-bf92-98ad211ec8e0" name="Default Changelist" comment="First commit :rocket:">
-      <change afterPath="$PROJECT_DIR$/src/Views/FrameMenu.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Views/FrameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Controllers/PessoaDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Controllers/PessoaDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Enums/Siglas.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Models/Pessoa.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Models/Pessoa.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/Models/PessoaEndereco.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Models/PessoaEndereco.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Testes/TesteCategoria.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$5.class" afterDir="false" />
@@ -13,9 +14,6 @@
       <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$7.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$8$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$8$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/Views/DialogEstado$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Views/DialogEstado$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/PessoaEndereco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/PessoaEndereco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/DialogPessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/DialogPessoa.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +77,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568589045084</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="First commit :rocket:">
+      <created>1568592357690</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1568592357690</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
